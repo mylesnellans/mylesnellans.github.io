@@ -207,11 +207,11 @@
     .pres-list { list-style: none; }
     .pres-item {
       display: grid;
-      grid-template-columns: 76px 1fr;
+      grid-template-columns: 76px 1fr 150px;
       gap: 20px;
-      padding: 14px 0;
+      padding: 16px 0;
       border-bottom: 1px solid #DDD8CF;
-      align-items: start;
+      align-items: center;
     }
     .pres-item:last-child { border-bottom: none; }
     .pres-date {
@@ -222,6 +222,7 @@
       letter-spacing: 0.05em;
       color: #888;
       padding-top: 3px;
+      align-self: start;
     }
     .pres-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 2px; }
     .pres-content .pres-type {
@@ -234,54 +235,29 @@
       margin-right: 8px;
     }
     .pres-content p { font-size: 0.9rem; color: #555; font-style: italic; }
-
-    /* Conference photo section */
-    .conf-photos-heading {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #555;
-      margin: 44px 0 14px;
-      padding-top: 28px;
-      border-top: 1px solid #C8C0B0;
-    }
-    .conf-photos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-    }
-    .conf-photo-item {
+    .pres-photo {
+      width: 150px;
+      height: 110px;
       border: 1px solid #C8C0B0;
       background: #E8E4DC;
-      aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .conf-photo-item img { width: 100%; height: 100%; object-fit: cover; }
-    .conf-photo-placeholder {
+    .pres-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .pres-photo-placeholder {
       text-align: center;
-      color: #888;
-      font-size: 0.8rem;
+      color: #aaa;
+      font-size: 0.72rem;
       font-style: italic;
-      padding: 12px;
-    }
-    .conf-photo-placeholder span { display: block; font-size: 1.6rem; margin-bottom: 6px; }
-    .conf-photo-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(26,26,26,0.72);
-      color: #f5f5f5;
-      font-size: 0.75rem;
       font-family: 'Inter', sans-serif;
-      padding: 5px 8px;
+      padding: 10px;
+      line-height: 1.4;
     }
-
+    .pres-photo-placeholder span { display: block; font-size: 1.4rem; margin-bottom: 4px; }
     /* ─── Gallery ─── */
     .gallery-intro {
       font-size: 0.95rem;
@@ -359,10 +335,11 @@
     }
 
     /* ─── Responsive ─── */
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .header-inner { flex-direction: column; }
-      .tab-nav button { padding: 12px 12px 9px; font-size: 0.75rem; }
-      .pres-item { grid-template-columns: 1fr; gap: 4px; }
+      .tab-nav button { padding: 12px 10px 9px; font-size: 0.72rem; }
+      .pres-item { grid-template-columns: 76px 1fr; }
+      .pres-photo { grid-column: 2; width: 100%; height: 140px; }
       .pres-date { padding-top: 0; }
     }
   </style>
@@ -527,6 +504,10 @@
           <span class="pres-type">Poster</span>
           <p>Discovery Day 2026 - Symposium &middot; Knoxville, Tennessee</p>
         </div>
+        <div class="pres-photo">
+          <!-- Replace inner div with: <img src="talk-may2025.jpg" alt="Talk, May 2025" /> -->
+          <div class="pres-photo-placeholder"><span>📷</span>Add photo</div>
+        </div>
       </li>
 
       <li class="pres-item">
@@ -536,49 +517,14 @@
           <span class="pres-type">Poster</span>
           <p>REU Research Symposium &middot; Lexington, Kentucky</p>
         </div>
+        <div class="pres-photo">
+          <!-- Replace inner div with: <img src="talk-may2025.jpg" alt="Talk, May 2025" /> -->
+          <div class="pres-photo-placeholder"><span>📷</span>Add photo</div>
+        </div>
       </li>
 
     </ul>
 
-    <!-- ── Conference Photos ── -->
-    <h3 class="conf-photos-heading">Conference &amp; Event Photographs</h3>
-    <div class="conf-photos-grid">
-
-      <!-- To add a real photo: replace the .conf-photo-placeholder div with <img src="conf1.jpg" alt="..." /> -->
-
-      <div class="conf-photo-item">
-        <div class="conf-photo-placeholder">
-          <span>📷</span>
-          Add conference photo here
-        </div>
-        <div class="conf-photo-caption">[Conference Name], [Year]</div>
-      </div>
-
-      <div class="conf-photo-item">
-        <div class="conf-photo-placeholder">
-          <span>📷</span>
-          Add conference photo here
-        </div>
-        <div class="conf-photo-caption">[Conference Name], [Year]</div>
-      </div>
-
-      <div class="conf-photo-item">
-        <div class="conf-photo-placeholder">
-          <span>📷</span>
-          Add conference photo here
-        </div>
-        <div class="conf-photo-caption">[Conference Name], [Year]</div>
-      </div>
-
-      <div class="conf-photo-item">
-        <div class="conf-photo-placeholder">
-          <span>📷</span>
-          Add conference photo here
-        </div>
-        <div class="conf-photo-caption">[Conference Name], [Year]</div>
-      </div>
-
-    </div>
   </div>
 
   <!-- ─── Gallery ─── -->
