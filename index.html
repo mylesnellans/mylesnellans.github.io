@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Academic Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: #FAFAF8;
+      color: #1a1a1a;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+    a { color: #1B3A6B; text-decoration: underline; }
+    a:hover { color: #0f2344; }
+    hr { border: none; border-top: 1px solid #C8C0B0; margin: 28px 0; }
+
+    /* ─── Page Shell ─── */
+    .page-wrapper { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+
+    /* ─── Header ─── */
+    header {
+      border-bottom: 2px solid #1B3A6B;
+      padding: 36px 0 24px;
+    }
+    .header-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 36px;
+    }
+    .header-photo {
+      flex-shrink: 0;
+      width: 130px;
+      height: 130px;
+      border: 1px solid #C8C0B0;
+      background: #E8E4DC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      color: #6B6B6B;
+      overflow: hidden;
+    }
+    .header-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .header-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .header-text .role {
+      font-size: 1rem;
+      font-style: italic;
+      color: #3d3d3d;
+      margin-bottom: 2px;
+    }
+    .header-text .institution {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 14px;
+    }
+    .header-links {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .header-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #1B3A6B;
+      text-decoration: none;
+      padding: 3px 12px;
+      border: 1px solid #1B3A6B;
+      margin-right: -1px;
+      background: #fff;
+      transition: background 0.15s, color 0.15s;
+    }
+    .header-links a:first-child { border-radius: 2px 0 0 2px; }
+    .header-links a:last-child { border-radius: 0 2px 2px 0; }
+    .header-links a:hover { background: #1B3A6B; color: #fff; }
+
+    /* ─── Tab Navigation ─── */
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid #C8C0B0;
+      margin-top: 0;
+      background: #FAFAF8;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .tab-nav button {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #555;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 14px 20px 11px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .tab-nav button:hover { color: #1B3A6B; }
+    .tab-nav button.active {
+      color: #1B3A6B;
+      border-bottom-color: #1B3A6B;
+    }
+
+    /* ─── Tab Panels ─── */
+    .tab-panel { display: none; padding: 44px 0 60px; }
+    .tab-panel.active { display: block; }
+
+    /* ─── Section heading ─── */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.015em;
+      margin-bottom: 6px;
+      color: #1B3A6B;
+    }
+    .section-rule {
+      border: none;
+      border-top: 1px solid #1B3A6B;
+      margin: 0 0 24px;
+    }
+
+    /* ─── About / Home ─── */
+    .about-body p { margin-bottom: 14px; color: #222; max-width: 700px; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .interests-block { margin-top: 28px; }
+    .interests-block h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .interest-list {
+      list-style: disc;
+      padding-left: 20px;
+      color: #333;
+    }
+    .interest-list li { margin-bottom: 4px; }
+
+    /* ─── Publications ─── */
+    .pub-list { list-style: none; }
+    .pub-item { padding: 18px 0; border-bottom: 1px solid #DDD8CF; }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-title { font-size: 1.05rem; font-weight: 500; margin-bottom: 3px; }
+    .pub-title a { color: #1a1a1a; }
+    .pub-title a:hover { color: #1B3A6B; }
+    .pub-authors { font-size: 0.92rem; color: #444; margin-bottom: 2px; }
+    .pub-authors strong { color: #1a1a1a; font-style: italic; }
+    .pub-venue { font-size: 0.9rem; color: #555; font-style: italic; margin-bottom: 8px; }
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .pub-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border: 1px solid #C8C0B0;
+      color: #555;
+      background: #F0EDE6;
+    }
+    .pub-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #1B3A6B;
+      text-decoration: underline;
+    }
+    .pub-year-group { margin-bottom: 8px; }
+    .pub-year-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 0;
+      padding: 16px 0 4px;
+      border-top: 1px solid #DDD8CF;
+    }
+
+    /* ─── Presentations ─── */
+    .pres-list { list-style: none; }
+    .pres-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid #DDD8CF;
+      align-items: start;
+    }
+    .pres-item:last-child { border-bottom: none; }
+    .pres-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      padding-top: 3px;
+    }
+    .pres-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 2px; }
+    .pres-content .pres-type {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #1B3A6B;
+      margin-right: 8px;
+    }
+    .pres-content p { font-size: 0.9rem; color: #555; font-style: italic; }
+
+    /* Conference photo section */
+    .conf-photos-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #555;
+      margin: 44px 0 14px;
+      padding-top: 28px;
+      border-top: 1px solid #C8C0B0;
+    }
+    .conf-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .conf-photo-item {
+      border: 1px solid #C8C0B0;
+      background: #E8E4DC;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .conf-photo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .conf-photo-placeholder {
+      text-align: center;
+      color: #888;
+      font-size: 0.8rem;
+      font-style: italic;
+      padding: 12px;
+    }
+    .conf-photo-placeholder span { display: block; font-size: 1.6rem; margin-bottom: 6px; }
+    .conf-photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(26,26,26,0.72);
+      color: #f5f5f5;
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      padding: 5px 8px;
+    }
+
+    /* ─── Gallery ─── */
+    .gallery-intro {
+      font-size: 0.95rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 22px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      border: 1px solid #C8C0B0;
+      background: #E8E4DC;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-placeholder {
+      text-align: center;
+      color: #888;
+      font-size: 0.8rem;
+      font-style: italic;
+      padding: 12px;
+    }
+    .gallery-placeholder span { display: block; font-size: 1.8rem; margin-bottom: 6px; }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(26,26,26,0.72);
+      color: #f5f5f5;
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      padding: 5px 8px;
+    }
+
+    /* ─── Contact ─── */
+    .contact-table { width: 100%; border-collapse: collapse; max-width: 580px; }
+    .contact-table tr { border-bottom: 1px solid #DDD8CF; }
+    .contact-table tr:last-child { border-bottom: none; }
+    .contact-table td { padding: 12px 0; vertical-align: top; }
+    .contact-table td:first-child {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #888;
+      width: 130px;
+      padding-top: 15px;
+    }
+    .contact-table td:last-child { font-size: 0.98rem; }
+    .contact-note {
+      margin-top: 28px;
+      font-size: 0.92rem;
+      color: #555;
+      font-style: italic;
+      max-width: 520px;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid #C8C0B0;
+      padding: 18px 0;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      .header-inner { flex-direction: column; }
+      .tab-nav button { padding: 12px 12px 9px; font-size: 0.75rem; }
+      .pres-item { grid-template-columns: 1fr; gap: 4px; }
+      .pres-date { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ─── Header ─── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-photo">
+        <!-- Replace with: <img src="photo.jpg" alt="Your Name" /> -->
+        👤
+      </div>
+      <div class="header-text">
+        <h1>Your Full Name</h1>
+        <div class="role">PhD Candidate / Researcher / Associate Professor</div>
+        <div class="institution">Department of [Your Department] &middot; University of [Your Institution]</div>
+        <div class="header-links">
+          <a href="cv.pdf" target="_blank">Curriculum Vitae</a>
+          <a href="mailto:your@email.ac.uk">Email</a>
+          <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+          <a href="https://orcid.org/0000-0000-0000-0000" target="_blank">ORCID</a>
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── Tab Navigation ─── -->
+  <div class="tab-nav" role="tablist">
+    <button class="active" data-tab="about" role="tab">About</button>
+    <button data-tab="publications" role="tab">Publications</button>
+    <button data-tab="presentations" role="tab">Presentations</button>
+    <button data-tab="gallery" role="tab">Gallery</button>
+    <button data-tab="contact" role="tab">Contact</button>
+  </div>
+
+  <!-- ─── About ─── -->
+  <div id="tab-about" class="tab-panel active" role="tabpanel">
+    <h2 class="section-title">About</h2>
+    <hr class="section-rule" />
+    <div class="about-body">
+      <p>
+        I am a [role] in the <a href="#">[Laboratory / Research Group Name]</a> at the
+        [Department] of [University]. My research addresses fundamental questions in
+        [broad research area], with particular focus on [specific sub-field or question].
+      </p>
+      <p>
+        Before joining [current institution], I completed my [degree] at [previous institution]
+        under the supervision of <a href="#">Prof. [Name]</a>. I have held visiting positions at
+        [other institutions] and my work has been supported by [funding bodies or grants].
+      </p>
+      <p>
+        I teach [courses] and welcome enquiries from prospective graduate students and
+        postdoctoral researchers interested in [research areas].
+      </p>
+    </div>
+
+    <div class="interests-block">
+      <h3>Research Interests</h3>
+      <ul class="interest-list">
+        <li>Research area or topic one</li>
+        <li>Research area or topic two</li>
+        <li>Research area or topic three</li>
+        <li>Research area or topic four</li>
+        <li>Research area or topic five</li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div class="interests-block">
+      <h3>Education</h3>
+      <ul class="interest-list">
+        <li><strong>Ph.D.</strong> [Field] &mdash; University of [Name], [Year]</li>
+        <li><strong>M.Sc.</strong> [Field] &mdash; University of [Name], [Year]</li>
+        <li><strong>B.Sc.</strong> [Field] &mdash; University of [Name], [Year]</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── Publications ─── -->
+  <div id="tab-publications" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Publications</h2>
+    <hr class="section-rule" />
+
+    <p class="pub-year-heading">2025</p>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-title">
+          <a href="#">Title of Your Most Recent Paper</a>
+        </div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-Author A, Co-Author B</div>
+        <div class="pub-venue"><em>Journal of [Field]</em>, Vol. XX(X), pp. XX&ndash;XX, 2025.</div>
+        <div class="pub-meta">
+          <span class="pub-badge">Journal Article</span>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+          <a class="pub-link" href="#">Data & Code</a>
+        </div>
+      </li>
+    </ul>
+
+    <p class="pub-year-heading">2024</p>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-title">
+          <a href="#">Title of Your Second Paper</a>
+        </div>
+        <div class="pub-authors">Co-Author A, <strong>Your Name</strong>, Co-Author C</div>
+        <div class="pub-venue"><em>Proceedings of [Conference Name]</em> (CONF '24), City, Country, 2024.</div>
+        <div class="pub-meta">
+          <span class="pub-badge">Conference Paper</span>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+          <a class="pub-link" href="#">Slides</a>
+        </div>
+      </li>
+      <li class="pub-item">
+        <div class="pub-title">
+          <a href="#">Title of Your Third Paper</a>
+        </div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-Author D</div>
+        <div class="pub-venue"><em>Journal of [Field]</em>, Vol. XX(X), pp. XX&ndash;XX, 2024.</div>
+        <div class="pub-meta">
+          <span class="pub-badge">Journal Article</span>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+        </div>
+      </li>
+    </ul>
+
+    <p class="pub-year-heading">2023</p>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <div class="pub-title">
+          <a href="#">Title of an Earlier Paper</a>
+        </div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-Author E, Co-Author F</div>
+        <div class="pub-venue"><em>Journal of [Field]</em>, Vol. XX(X), 2023.</div>
+        <div class="pub-meta">
+          <span class="pub-badge">Journal Article</span>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ─── Presentations ─── -->
+  <div id="tab-presentations" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Presentations &amp; Talks</h2>
+    <hr class="section-rule" />
+
+    <ul class="pres-list">
+
+      <li class="pres-item">
+        <div class="pres-date">May 2025</div>
+        <div class="pres-content">
+          <h3>Title of Your Talk</h3>
+          <span class="pres-type">Invited Talk</span>
+          <p>[Conference or Institution Name] &middot; City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Oct 2024</div>
+        <div class="pres-content">
+          <h3>Title of Your Poster</h3>
+          <span class="pres-type">Poster</span>
+          <p>[Conference Name] &middot; City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Jun 2024</div>
+        <div class="pres-content">
+          <h3>Title of Your Oral Presentation</h3>
+          <span class="pres-type">Oral Presentation</span>
+          <p>[Symposium / Workshop Name] &middot; City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Mar 2023</div>
+        <div class="pres-content">
+          <h3>Topic of Your Guest Lecture</h3>
+          <span class="pres-type">Guest Lecture</span>
+          <p>[Course / University Name] &middot; City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Nov 2022</div>
+        <div class="pres-content">
+          <h3>Title of an Earlier Talk</h3>
+          <span class="pres-type">Contributed Talk</span>
+          <p>[Conference Name] &middot; City, Country</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <!-- ── Conference Photos ── -->
+    <h3 class="conf-photos-heading">Conference &amp; Event Photographs</h3>
+    <div class="conf-photos-grid">
+
+      <!-- To add a real photo: replace the .conf-photo-placeholder div with <img src="conf1.jpg" alt="..." /> -->
+
+      <div class="conf-photo-item">
+        <div class="conf-photo-placeholder">
+          <span>📷</span>
+          Add conference photo here
+        </div>
+        <div class="conf-photo-caption">[Conference Name], [Year]</div>
+      </div>
+
+      <div class="conf-photo-item">
+        <div class="conf-photo-placeholder">
+          <span>📷</span>
+          Add conference photo here
+        </div>
+        <div class="conf-photo-caption">[Conference Name], [Year]</div>
+      </div>
+
+      <div class="conf-photo-item">
+        <div class="conf-photo-placeholder">
+          <span>📷</span>
+          Add conference photo here
+        </div>
+        <div class="conf-photo-caption">[Conference Name], [Year]</div>
+      </div>
+
+      <div class="conf-photo-item">
+        <div class="conf-photo-placeholder">
+          <span>📷</span>
+          Add conference photo here
+        </div>
+        <div class="conf-photo-caption">[Conference Name], [Year]</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Gallery ─── -->
+  <div id="tab-gallery" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Gallery</h2>
+    <hr class="section-rule" />
+    <p class="gallery-intro">Field work, laboratory photographs, and other images from research activities.</p>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Field Work / Lab Photo</div>
+        <div class="gallery-caption">Caption for image one</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Research Equipment</div>
+        <div class="gallery-caption">Caption for image two</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Field Site</div>
+        <div class="gallery-caption">Caption for image three</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Research Team</div>
+        <div class="gallery-caption">Caption for image four</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Laboratory</div>
+        <div class="gallery-caption">Caption for image five</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Fieldwork</div>
+        <div class="gallery-caption">Caption for image six</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Contact ─── -->
+  <div id="tab-contact" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Contact</h2>
+    <hr class="section-rule" />
+
+    <table class="contact-table">
+      <tr>
+        <td>Email</td>
+        <td><a href="mailto:your@email.ac.uk">your@email.ac.uk</a></td>
+      </tr>
+      <tr>
+        <td>Office</td>
+        <td>Room [XX], [Building Name]<br />[University], [City], [Postcode / Zip]</td>
+      </tr>
+      <tr>
+        <td>Google Scholar</td>
+        <td><a href="https://scholar.google.com" target="_blank">View profile</a></td>
+      </tr>
+      <tr>
+        <td>ORCID</td>
+        <td><a href="https://orcid.org/0000-0000-0000-0000" target="_blank">0000-0000-0000-0000</a></td>
+      </tr>
+      <tr>
+        <td>GitHub</td>
+        <td><a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></td>
+      </tr>
+      <tr>
+        <td>LinkedIn</td>
+        <td><a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>+1 (000) 000-0000</td>
+      </tr>
+    </table>
+
+    <p class="contact-note">
+      I am happy to discuss research collaborations, graduate and postdoctoral opportunities,
+      or to respond to media enquiries. I aim to reply to all correspondence within five working days.
+    </p>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <p>&copy; 2026 Your Name &nbsp;&middot;&nbsp; [University] &nbsp;&middot;&nbsp; Last updated May 2026</p>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<!-- ─── Tab switching ─── -->
+<script>
+  const buttons = document.querySelectorAll('.tab-nav button');
+  const panels  = document.querySelectorAll('.tab-panel');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // support direct-linking via URL hash, e.g. index.html#publications
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const btn = document.querySelector('[data-tab="' + hash + '"]');
+    if (btn) btn.click();
+  }
+</script>
+
+</body>
+</html>
