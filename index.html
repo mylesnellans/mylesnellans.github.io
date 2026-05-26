@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Academic Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111827;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+
+    /* ─── Layout ─── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; }
+    section:nth-child(even) { background: #F9FAFB; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #E5E7EB;
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { font-weight: 600; font-size: 1rem; color: #111827; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.9rem; color: #374151; font-weight: 500; }
+    .nav-links a:hover { color: #2563EB; text-decoration: none; }
+
+    /* ─── Hero ─── */
+    #hero {
+      padding: 80px 0 72px;
+      background: #ffffff;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .hero-photo {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #DBEAFE;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #2563EB;
+      border: 3px solid #BFDBFE;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-text h1 { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+    .hero-text .role {
+      font-size: 1.05rem;
+      color: #2563EB;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .hero-text .institution { color: #6B7280; margin-bottom: 20px; }
+    .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-primary { background: #2563EB; color: #fff; }
+    .btn-primary:hover { background: #1D4ED8; text-decoration: none; }
+    .btn-outline { border: 1.5px solid #D1D5DB; color: #374151; }
+    .btn-outline:hover { border-color: #2563EB; color: #2563EB; text-decoration: none; }
+
+    /* ─── Section headings ─── */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #BFDBFE;
+      display: inline-block;
+    }
+
+    /* ─── About ─── */
+    .about-text p { color: #374151; margin-bottom: 16px; max-width: 720px; }
+    .interests { margin-top: 24px; }
+    .interests h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+    .tag-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.825rem;
+      font-weight: 500;
+    }
+
+    /* ─── Publications ─── */
+    .pub-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+    .pub-item {
+      border-left: 3px solid #2563EB;
+      padding-left: 20px;
+    }
+    .pub-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+    .pub-authors { color: #6B7280; font-size: 0.875rem; margin-bottom: 4px; }
+    .pub-venue { color: #374151; font-size: 0.875rem; font-style: italic; margin-bottom: 8px; }
+    .pub-links { display: flex; gap: 10px; }
+    .pub-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 4px;
+      border: 1px solid #BFDBFE;
+      color: #2563EB;
+      background: #EFF6FF;
+    }
+    .pub-link:hover { background: #DBEAFE; text-decoration: none; }
+
+    /* ─── Projects ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 24px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .project-card:hover { box-shadow: 0 4px 16px rgba(37,99,235,0.1); border-color: #93C5FD; }
+    .project-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .project-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .project-card p { font-size: 0.875rem; color: #6B7280; margin-bottom: 14px; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .project-tag {
+      background: #F3F4F6;
+      color: #374151;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+    }
+
+    /* ─── Presentations ─── */
+    .pres-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .pres-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .pres-date {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2563EB;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 6px;
+      padding: 4px 8px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .pres-content h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+    .pres-content p { font-size: 0.85rem; color: #6B7280; }
+
+    /* ─── Gallery ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #E5E7EB;
+      position: relative;
+      aspect-ratio: 4/3;
+      background: #F3F4F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-placeholder {
+      color: #9CA3AF;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 16px;
+    }
+    .gallery-placeholder span { display: block; font-size: 2rem; margin-bottom: 6px; }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(17,24,39,0.7);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 6px 10px;
+    }
+
+    /* ─── Contact ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .contact-card:hover { border-color: #93C5FD; box-shadow: 0 2px 8px rgba(37,99,235,0.08); text-decoration: none; }
+    .contact-icon { font-size: 1.5rem; }
+    .contact-label { font-size: 0.75rem; color: #9CA3AF; font-weight: 500; }
+    .contact-value { font-size: 0.9rem; color: #111827; font-weight: 600; }
+
+    /* ─── Footer ─── */
+    footer {
+      background: #F9FAFB;
+      border-top: 1px solid #E5E7EB;
+      padding: 28px 0;
+      text-align: center;
+      color: #9CA3AF;
+      font-size: 0.825rem;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-links { justify-content: center; }
+      .pres-item { grid-template-columns: 1fr; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav>
+  <div class="container">
+    <span class="nav-brand">Your Name</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#presentations">Talks</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-photo">
+        <!-- Replace with: <img src="photo.jpg" alt="Your Name" /> -->
+        👤
+      </div>
+      <div class="hero-text">
+        <h1>Your Full Name</h1>
+        <div class="role">PhD Candidate / Researcher / Professor</div>
+        <div class="institution">Department of [Your Department] · University of [Your Institution]</div>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="cv.pdf" target="_blank">📄 Download CV</a>
+          <a class="btn btn-outline" href="mailto:your@email.com">✉️ Email Me</a>
+          <a class="btn btn-outline" href="https://scholar.google.com" target="_blank">Google Scholar</a>
+          <a class="btn btn-outline" href="https://github.com/yourusername" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ─── -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-text">
+      <p>
+        I am a [role] at the [Department / Lab] at [University]. My research focuses on
+        [broad research area], with a particular emphasis on [specific focus]. I am interested
+        in understanding [key questions your work addresses].
+      </p>
+      <p>
+        Before joining [current institution], I completed my [degree] at [previous institution].
+        I have collaborated with [any notable collaborators or labs] and my work has been supported
+        by [funding sources, grants, or scholarships].
+      </p>
+      <p>
+        Outside of research, I enjoy [hobbies or other interests that humanize you].
+      </p>
+    </div>
+    <div class="interests">
+      <h3>Research Interests</h3>
+      <div class="tag-list">
+        <span class="tag">Research Topic 1</span>
+        <span class="tag">Research Topic 2</span>
+        <span class="tag">Research Topic 3</span>
+        <span class="tag">Research Topic 4</span>
+        <span class="tag">Research Topic 5</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Publications ─── -->
+<section id="publications">
+  <div class="container">
+    <h2 class="section-title">Publications</h2>
+    <ul class="pub-list">
+
+      <li class="pub-item">
+        <div class="pub-title">Title of Your Most Recent Paper</div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-Author One, Co-Author Two</div>
+        <div class="pub-venue">Journal of [Field] · 2025 · Vol. XX, pp. XX–XX</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+          <a class="pub-link" href="#">Code</a>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-title">Title of Your Second Paper</div>
+        <div class="pub-authors">Co-Author One, <strong>Your Name</strong>, Co-Author Three</div>
+        <div class="pub-venue">Proceedings of [Conference Name] (CONF '24) · 2024</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <div class="pub-title">Title of Your Third Paper</div>
+        <div class="pub-authors"><strong>Your Name</strong>, Co-Author Four</div>
+        <div class="pub-venue">Journal of [Field] · 2023</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">DOI</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ─── Projects ─── -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">🔬</div>
+        <h3>Project Title One</h3>
+        <p>A short description of this research project, what problem it solves and what methods you used.</p>
+        <div class="project-tags">
+          <span class="project-tag">Method / Tool</span>
+          <span class="project-tag">Dataset</span>
+          <span class="project-tag">2024–present</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🧬</div>
+        <h3>Project Title Two</h3>
+        <p>A short description of this research project, what problem it solves and what methods you used.</p>
+        <div class="project-tags">
+          <span class="project-tag">Collaboration</span>
+          <span class="project-tag">Grant-funded</span>
+          <span class="project-tag">2023–2024</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3>Project Title Three</h3>
+        <p>A short description of this research project, what problem it solves and what methods you used.</p>
+        <div class="project-tags">
+          <span class="project-tag">Open Source</span>
+          <span class="project-tag">Python</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Presentations ─── -->
+<section id="presentations">
+  <div class="container">
+    <h2 class="section-title">Presentations & Talks</h2>
+    <ul class="pres-list">
+
+      <li class="pres-item">
+        <div class="pres-date">May<br>2025</div>
+        <div class="pres-content">
+          <h3>Talk Title — Invited Talk</h3>
+          <p>[Conference / Institution Name] · City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Oct<br>2024</div>
+        <div class="pres-content">
+          <h3>Poster: Title of Your Poster Presentation</h3>
+          <p>[Conference Name] · City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Jun<br>2024</div>
+        <div class="pres-content">
+          <h3>Oral: Title of Oral Presentation</h3>
+          <p>[Workshop / Symposium Name] · City, Country</p>
+        </div>
+      </li>
+
+      <li class="pres-item">
+        <div class="pres-date">Mar<br>2023</div>
+        <div class="pres-content">
+          <h3>Guest Lecture: Topic Title</h3>
+          <p>[Course / University Name] · City, Country</p>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ─── Gallery ─── -->
+<section id="gallery">
+  <div class="container">
+    <h2 class="section-title">Gallery</h2>
+    <div class="gallery-grid">
+
+      <!-- To add a real image: replace the div.gallery-placeholder with <img src="photo1.jpg" alt="..." /> -->
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Field Work / Lab Photo</div>
+        <div class="gallery-caption">Caption for photo 1</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Conference / Presentation</div>
+        <div class="gallery-caption">Caption for photo 2</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Team / Collaboration</div>
+        <div class="gallery-caption">Caption for photo 3</div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-placeholder"><span>🖼️</span>Research Site / Equipment</div>
+        <div class="gallery-caption">Caption for photo 4</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ─── -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+
+      <a class="contact-card" href="mailto:your@email.com">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">your@email.com</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://scholar.google.com" target="_blank">
+        <span class="contact-icon">🎓</span>
+        <div>
+          <div class="contact-label">Google Scholar</div>
+          <div class="contact-value">Your Name</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://github.com/yourusername" target="_blank">
+        <span class="contact-icon">💻</span>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">@yourusername</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://linkedin.com/in/yourprofile" target="_blank">
+        <span class="contact-icon">🔗</span>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">Your Name</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://orcid.org/0000-0000-0000-0000" target="_blank">
+        <span class="contact-icon">🆔</span>
+        <div>
+          <div class="contact-label">ORCID</div>
+          <div class="contact-value">0000-0000-0000-0000</div>
+        </div>
+      </a>
+
+      <div class="contact-card">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Office</div>
+          <div class="contact-value">Room XX, Building Name</div>
+        </div>
+      </div>
+
+    </div>
+    <p style="color:#6B7280; font-size:0.875rem; max-width:560px;">
+      I am always open to collaboration, questions about my research, or just a chat.
+      Feel free to reach out via email — I typically respond within a few days.
+    </p>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="container">
+    <p>© 2026 Your Name · Built with GitHub Pages</p>
+  </div>
+</footer>
+
+</body>
+</html>
