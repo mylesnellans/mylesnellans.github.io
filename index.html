@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Academic Profile</title>
+  <title>Myles Nellans — Academic Profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -258,29 +258,43 @@
       line-height: 1.4;
     }
     .pres-photo-placeholder span { display: block; font-size: 1.4rem; margin-bottom: 4px; }
-    /* ─── Gallery ─── */
+
+    /* ─── Gallery Slider ─── */
     .gallery-intro {
       font-size: 0.95rem;
       color: #555;
       font-style: italic;
       margin-bottom: 22px;
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 20px;
+    .gallery-slider {
+      position: relative;
+      user-select: none;
     }
-    .gallery-item {
-      border: 1px solid #C8C0B0;
-      background: #E8E4DC;
-      aspect-ratio: 4/3;
+    .gallery-track-outer {
       overflow: hidden;
+      border: 1px solid #C8C0B0;
+      background: #1a1a1a;
+    }
+    .gallery-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .gallery-slide {
+      min-width: 100%;
+      aspect-ratio: 4/3;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #E8E4DC;
     }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
     .gallery-placeholder {
       text-align: center;
       color: #888;
@@ -294,9 +308,59 @@
       bottom: 0; left: 0; right: 0;
       background: rgba(26,26,26,0.72);
       color: #f5f5f5;
-      font-size: 0.75rem;
+      font-size: 0.82rem;
       font-family: 'Inter', sans-serif;
-      padding: 5px 8px;
+      padding: 8px 16px;
+    }
+    .gallery-btn {
+      position: absolute;
+      top: calc(50% - 22px);
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.88);
+      border: 1px solid #C8C0B0;
+      width: 44px;
+      height: 44px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #1B3A6B;
+      z-index: 10;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      line-height: 1;
+    }
+    .gallery-btn:hover { background: #1B3A6B; color: #fff; border-color: #1B3A6B; }
+    .gallery-btn-prev { left: 12px; }
+    .gallery-btn-next { right: 12px; }
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 0 2px;
+    }
+    .gallery-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C8C0B0;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .gallery-dot.active {
+      background: #1B3A6B;
+      transform: scale(1.35);
+    }
+    .gallery-counter {
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 0.05em;
+      padding: 4px 0 0;
     }
 
     /* ─── Contact ─── */
@@ -341,6 +405,7 @@
       .pres-item { grid-template-columns: 76px 1fr; }
       .pres-photo { grid-column: 2; width: 100%; height: 140px; }
       .pres-date { padding-top: 0; }
+      .gallery-btn { width: 36px; height: 36px; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -357,12 +422,12 @@
       <div class="header-text">
         <h1>Myles Nellans</h1>
         <div class="role">Undergraduate Researcher</div>
-        <div class="institution">Department of Ecology & Evolutionary Biology &middot; University of Tennessee, Knoxville</div>
+        <div class="institution">Department of Ecology &amp; Evolutionary Biology &middot; University of Tennessee, Knoxville</div>
         <div class="header-links">
           <a href="CV_Current.docx.pdf" target="_blank">Curriculum Vitae</a>
           <a href="mailto:mylesnellans@gmail.com">Email</a>
           <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
-          <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+          <a href="https://github.com/mylesnellans" target="_blank">GitHub</a>
         </div>
       </div>
     </div>
@@ -370,11 +435,11 @@
 
   <!-- ─── Tab Navigation ─── -->
   <div class="tab-nav" role="tablist">
-    <button class="active" data-tab="about" role="tab">About</button>
-    <button data-tab="publications" role="tab">Publications</button>
-    <button data-tab="presentations" role="tab">Presentations</button>
-    <button data-tab="gallery" role="tab">Gallery</button>
-    <button data-tab="contact" role="tab">Contact</button>
+    <button class="active" data-tab="about" role="tab" aria-selected="true">About</button>
+    <button data-tab="publications" role="tab" aria-selected="false">Publications</button>
+    <button data-tab="presentations" role="tab" aria-selected="false">Presentations</button>
+    <button data-tab="gallery" role="tab" aria-selected="false">Gallery</button>
+    <button data-tab="contact" role="tab" aria-selected="false">Contact</button>
   </div>
 
   <!-- ─── About ─── -->
@@ -383,18 +448,17 @@
     <hr class="section-rule" />
     <div class="about-body">
       <p>
-        My name is Myles Nellans. I am currently a junior at the Univeirsty of Tennessee Knoxville studying Wildlife
+        My name is Myles Nellans. I am currently a junior at the University of Tennessee Knoxville studying Wildlife
         and Fisheries Science. I also work as an undergraduate researcher in the <a href="https://www.biogeographyresearch.org/">Sheldon Lab</a>
         where I investigate how temperature and moisture levels affect the Nymphalidae species resilience to environmental change. My research explores
-        how envirmental factors affect ectotherms and and their ability to adapt. I am particularly interested in the effect global change has on the reproductive
+        how environmental factors affect ectotherms and their ability to adapt. I am particularly interested in the effect global change has on the reproductive
         success of insects.
       </p>
       <p>
-        I have also been fortunate enough to with many differnt species across different capacities. Some projects I have been involved in 
-        include population assesment, evaluation of IPR systems on water quality, and prediction of future climate change impacts on ectotherms. 
+        I have also been fortunate enough to work with many different species across different capacities. Some projects I have been involved in
+        include population assessment, evaluation of IPR systems on water quality, and prediction of future climate change impacts on ectotherms.
       </p>
-      <p> I regulary update this webiste with my current work, conferences, and published articles. Please feel free to contact me with any questions</p>
-
+      <p>I regularly update this website with my current work, conferences, and published articles. Please feel free to contact me with any questions.</p>
     </div>
 
     <div class="interests-block">
@@ -412,7 +476,7 @@
     <div class="interests-block">
       <h3>Education</h3>
       <ul class="interest-list">
-        <li><strong>B.S</strong> Wildlife and Fisheries Science &mdash; Univeristy of Tennesee, Knoxville, Anticipated 2028</li>
+        <li><strong>B.S.</strong> Wildlife and Fisheries Science &mdash; University of Tennessee, Knoxville, Anticipated 2028</li>
       </ul>
     </div>
   </div>
@@ -449,12 +513,11 @@
       <li class="pres-item">
         <div class="pres-date">August 2026</div>
         <div class="pres-content">
-          <h3>Accessing the Affect Moisture Levels have the Critical Thermal Maximum of the Vanessa Cardui Larval Stages</h3>
+          <h3>Assessing the Effect Moisture Levels have on the Critical Thermal Maximum of the Vanessa cardui Larval Stages</h3>
           <span class="pres-type">Poster</span>
-          <p>Discovery Day 2026 - Symposium &middot; Knoxville, Tennessee</p>
+          <p>Discovery Day 2026 &mdash; Symposium &middot; Knoxville, Tennessee</p>
         </div>
         <div class="pres-photo">
-          <!-- Replace inner div with: <img src="talk-may2025.jpg" alt="Talk, May 2025" /> -->
           <div class="pres-photo-placeholder"><span>📷</span>Add photo</div>
         </div>
       </li>
@@ -467,7 +530,6 @@
           <p>REU Research Symposium &middot; Lexington, Kentucky</p>
         </div>
         <div class="pres-photo">
-          <!-- Replace inner div with: <img src="talk-may2025.jpg" alt="Talk, May 2025" /> -->
           <div class="pres-photo-placeholder"><span>📷</span>Add photo</div>
         </div>
       </li>
@@ -482,38 +544,55 @@
     <hr class="section-rule" />
     <p class="gallery-intro">Field work, laboratory photographs, and other images from research activities.</p>
 
-    <div class="gallery-grid">
+    <div class="gallery-slider" role="region" aria-label="Photo gallery">
+      <div class="gallery-track-outer">
+        <div class="gallery-track">
 
-      <div class="gallery-item">
-        <img src="images/P.glaucus.jpeg">
-        <div class="gallery-caption">Starting out the field season!</div>
+          <div class="gallery-slide">
+            <img src="images/P.glaucus.jpeg" alt="Papilio glaucus (Eastern Tiger Swallowtail)">
+            <div class="gallery-caption">Starting out the field season!</div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="images/S.cybele.jpeg" alt="Speyeria cybele (Great Spangled Fritillary)">
+            <div class="gallery-caption">The Speyeria cybele are currently out in full force</div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="images/C.gryneus.jpeg" alt="Callophrys gryneus (Juniper Hairstreak)">
+            <div class="gallery-caption">Callophrys gryneus found during a butterfly monitoring session!</div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="images/Milkweed_Bug.jpeg" alt="Tetraopes tetrophthalmus (Red Milkweed Beetle)">
+            <div class="gallery-caption">Tetraopes tetrophthalmus found while sampling a riparian buffer</div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="images/Corer_Sample.jpeg" alt="Sediment corer sample collection">
+            <div class="gallery-caption">Caption for image five</div>
+          </div>
+
+          <div class="gallery-slide">
+            <div class="gallery-placeholder"><span>🖼️</span>Fieldwork</div>
+            <div class="gallery-caption">Caption for image six</div>
+          </div>
+
+        </div>
       </div>
 
-      <div class="gallery-item">
-        <img src="images/S.cybele.jpeg">
-        <div class="gallery-caption">The Speyeria cybele are currently out in full force</div>
-      </div>
+      <button class="gallery-btn gallery-btn-prev" aria-label="Previous image">&#8592;</button>
+      <button class="gallery-btn gallery-btn-next" aria-label="Next image">&#8594;</button>
 
-      <div class="gallery-item">
-        <img src="images/C.gryneus.jpeg">
-        <div class="gallery-caption">Callophrys gryneus found during a butterfly monitoring session!</div>
+      <div class="gallery-dots" role="tablist" aria-label="Gallery navigation">
+        <button class="gallery-dot active" aria-label="Image 1 of 6"></button>
+        <button class="gallery-dot" aria-label="Image 2 of 6"></button>
+        <button class="gallery-dot" aria-label="Image 3 of 6"></button>
+        <button class="gallery-dot" aria-label="Image 4 of 6"></button>
+        <button class="gallery-dot" aria-label="Image 5 of 6"></button>
+        <button class="gallery-dot" aria-label="Image 6 of 6"></button>
       </div>
-
-      <div class="gallery-item">
-        <img src="images/Milkweed_Bug.jpeg">
-        <div class="gallery-caption">Tetraopes tetrophthalmus found while sampling a riparian buffer</div>
-      </div>
-
-      <div class="gallery-item">
-        <img src="images/Corer_Sample.jpeg">
-        <div class="gallery-caption">Caption for image five</div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="gallery-placeholder"><span>🖼️</span>Fieldwork</div>
-        <div class="gallery-caption">Caption for image six</div>
-      </div>
-
+      <p class="gallery-counter">1 / 6</p>
     </div>
   </div>
 
@@ -525,7 +604,7 @@
     <table class="contact-table">
       <tr>
         <td>Email</td>
-        <td><a href="mailto:mylesnellans">mylesnellans@gmail.com</a></td>
+        <td><a href="mailto:mylesnellans@gmail.com">mylesnellans@gmail.com</a></td>
       </tr>
       <tr>
         <td>Google Scholar</td>
@@ -546,13 +625,13 @@
     </table>
 
     <p class="contact-note">
-      I am happy to discuss research collaborations and graduate opportunities, I aim to reply to all correspondence within two working days.
+      I am happy to discuss research collaborations and graduate opportunities. I aim to reply to all correspondence within two working days.
     </p>
   </div>
 
   <!-- ─── Footer ─── -->
   <footer>
-    <p>&copy; 2026 Myles Nellans &nbsp;&middot;&nbsp; Last updated May 2026</p>
+    <p>&copy; 2026 Myles Nellans &nbsp;&middot;&nbsp; Last updated June 2026</p>
   </footer>
 
 </div><!-- /page-wrapper -->
@@ -562,26 +641,75 @@
   const buttons = document.querySelectorAll('.tab-nav button');
   const panels  = document.querySelectorAll('.tab-panel');
 
+  function activateTab(target) {
+    buttons.forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    panels.forEach(p => p.classList.remove('active'));
+
+    const btn = document.querySelector('[data-tab="' + target + '"]');
+    const panel = document.getElementById('tab-' + target);
+    if (!btn || !panel) return;
+
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    panel.classList.add('active');
+  }
+
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.dataset.tab;
-
-      buttons.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      btn.classList.add('active');
-      document.getElementById('tab-' + target).classList.add('active');
-
+      activateTab(target);
+      history.pushState(null, '', '#' + target);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 
-  // support direct-linking via URL hash, e.g. index.html#publications
+  // Support direct-linking via URL hash, e.g. index.html#publications
   const hash = window.location.hash.replace('#', '');
-  if (hash) {
-    const btn = document.querySelector('[data-tab="' + hash + '"]');
-    if (btn) btn.click();
-  }
+  if (hash) activateTab(hash);
+</script>
+
+<!-- ─── Gallery Slider ─── -->
+<script>
+  (function () {
+    const track   = document.querySelector('.gallery-track');
+    const slides  = document.querySelectorAll('.gallery-slide');
+    const dots    = document.querySelectorAll('.gallery-dot');
+    const counter = document.querySelector('.gallery-counter');
+    const total   = slides.length;
+    let current   = 0;
+
+    function goTo(n) {
+      current = (n + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+      if (counter) counter.textContent = (current + 1) + ' / ' + total;
+    }
+
+    document.querySelector('.gallery-btn-prev').addEventListener('click', function () { goTo(current - 1); });
+    document.querySelector('.gallery-btn-next').addEventListener('click', function () { goTo(current + 1); });
+    dots.forEach(function (dot, i) { dot.addEventListener('click', function () { goTo(i); }); });
+
+    // Keyboard navigation (only when gallery tab is active)
+    document.addEventListener('keydown', function (e) {
+      if (!document.getElementById('tab-gallery').classList.contains('active')) return;
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // Touch/swipe support
+    var touchStartX = 0;
+    var outer = document.querySelector('.gallery-track-outer');
+    outer.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    outer.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+    });
+  })();
 </script>
 
 </body>
